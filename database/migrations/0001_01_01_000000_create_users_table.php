@@ -12,28 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('username', 50)->primary();
+            $table->text('password');
             $table->timestamps();
         });
-
-        Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
-        });
-
+        
         Schema::create('sessions', function (Blueprint $table) {
-            $table->string('id')->primary();
-            $table->foreignId('user_id')->nullable()->index();
-            $table->string('ip_address', 45)->nullable();
-            $table->text('user_agent')->nullable();
-            $table->longText('payload');
-            $table->integer('last_activity')->index();
+            $table->string('id')->primary(); // ID sesi unik
+            $table->string('user_id')->nullable()->index(); // Kolom user_id sebagai VARCHAR
+            $table->foreign('user_id')->references('username')->on('users'); // Foreign key ke kolom username
+            $table->string('ip_address', 45)->nullable(); // Menyimpan IP pengguna
+            $table->text('user_agent')->nullable(); // Menyimpan data User-Agent
+            $table->longText('payload'); // Data sesi tersimpan
+            $table->integer('last_activity')->index(); // Waktu aktivitas terakhir
         });
     }
 

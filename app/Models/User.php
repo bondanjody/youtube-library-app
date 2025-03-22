@@ -17,9 +17,12 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+    protected $primaryKey = 'username';
+    public $incrementing = false;
+    protected $keyType = 'string';
+
     protected $fillable = [
-        'name',
-        'email',
+        'username',
         'password',
     ];
 
@@ -44,5 +47,17 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // Relasi
+    public function videos()
+    {
+        return $this->hasMany(Video::class, 'created_by', 'username');
+    }
+
+    // Relasi: User punya banyak Category
+    public function categories()
+    {
+        return $this->hasMany(Category::class, 'created_by', 'username');
     }
 }
