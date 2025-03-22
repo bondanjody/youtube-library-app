@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ChannelController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,6 +24,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::resource('videos', VideoController::class);
     Route::resource('categories', CategoryController::class);
+    Route::resource('channels', ChannelController::class);
 });
 
 require __DIR__.'/auth.php';

@@ -31,4 +31,9 @@ class Video extends Model
     {
         return $this->belongsTo(Category::class, 'category_id', 'category_id');
     }
+
+    public function channel()
+    {
+        return $this->belongsTo(Channel::class, 'channel_id', 'channel_id');
+    }
 }
