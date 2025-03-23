@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\LoginUserAPIController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
@@ -20,3 +21,4 @@ Route::get('/user', function (Request $request) {
 //     Route::post('login', 'login');
 // });
 Route::post('/register', [RegisterUserAPIController::class, 'store']);
+Route::post('/login', [LoginUserAPIController::class, 'store']);
