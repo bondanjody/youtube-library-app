@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ChannelAPIController;
 use App\Http\Controllers\API\LoginUserAPIController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -22,3 +23,8 @@ Route::get('/user', function (Request $request) {
 // });
 Route::post('/register', [RegisterUserAPIController::class, 'store']);
 Route::post('/login', [LoginUserAPIController::class, 'store']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/channels', [ChannelAPIController::class, 'index']);
+    Route::post('/channels', [ChannelAPIController::class, 'store']);
+});
