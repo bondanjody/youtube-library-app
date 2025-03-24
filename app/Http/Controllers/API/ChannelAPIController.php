@@ -43,10 +43,10 @@ class ChannelAPIController extends Controller
         $channel = Channel::create([
             'channel_name' => $request->channel_name,
             'channel_url' => $request->channel_url,
-            'created_by' => $request->user()->username,
+            'created_by' => Auth::user()->username,
         ]);
 
-        return response()->json(['message' => 'Channel berhasil ditambahkan', 'data' => $$channel], 201);
+        return response()->json(['message' => 'Channel berhasil ditambahkan', 'data' => $channel], 201);
     }
 
     /**
